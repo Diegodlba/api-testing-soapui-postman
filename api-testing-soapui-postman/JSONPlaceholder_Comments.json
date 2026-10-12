@@ -698,7 +698,7 @@
   "variable": [
     {
       "key": "baseUrl",
-      "value": ""
+      "value": "https://jsonplaceholder.typicode.com"
     }
   ]
 }
