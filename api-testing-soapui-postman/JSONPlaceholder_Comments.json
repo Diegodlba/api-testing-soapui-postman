@@ -1,0 +1,704 @@
+{
+  "info": {
+    "_postman_id": "d924b7eb-8ebf-45f0-b0d2-c95cb20da16e",
+    "name": "JSONPlaceholder_Comments",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23417051",
+    "_collection_link": "https://go.postman.co/collection/23417051-d924b7eb-8ebf-45f0-b0d2-c95cb20da16e?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GET",
+      "item": [
+        {
+          "name": "GET_Valido_PorId",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code es 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"El id devuelto es 45\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.id).to.eql(45);",
+                  "});",
+                  "",
+                  "pm.test(\"El postId es 9\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.postId).to.eql(9);",
+                  "});",
+                  "",
+                  "pm.test(\"El email es el esperado\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.email).to.eql(\"Marcia@name.biz\");",
+                  "});",
+                  "",
+                  "pm.test(\"La respuesta tiene todos los campos esperados\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.all.keys(\"postId\", \"id\", \"name\", \"email\", \"body\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/comments/45",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                "45"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET_Valido_FiltroPostId",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code es 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Devuelve un array\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.be.an(\"array\");",
+                  "});",
+                  "",
+                  "pm.test(\"Devuelve exactamente 5 comentarios\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.length).to.eql(5);",
+                  "});",
+                  "",
+                  "pm.test(\"Todos los comentarios tienen postId = 9\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    jsonData.forEach(function (comentario) {",
+                  "        pm.expect(comentario.postId).to.eql(9);",
+                  "    });",
+                  "});",
+                  "",
+                  "pm.test(\"Los ids devueltos son los esperados (41-45)\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    const ids = jsonData.map(function (c) { return c.id; });",
+                  "    pm.expect(ids).to.eql([41, 42, 43, 44, 45]);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/comments?postId=9",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments"
+              ],
+              "query": [
+                {
+                  "key": "postId",
+                  "value": "9"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET_Invalido_IdInexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code es 404 Not Found\", function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});",
+                  "",
+                  "pm.test(\"La respuesta es un objeto vacío (sin mensaje de error)\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.be.an(\"object\");",
+                  "    pm.expect(Object.keys(jsonData)).to.have.lengthOf(0);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"postId\": 1,\n    \"name\": \"segundo comentario actualizado\",\n    \"email\": \"actualizado2@ejemplo.com\",\n    \"body\": \"segunda prueba de actualizacion con otro id\"\n}\n\n"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments/505",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                "505"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "POST",
+      "item": [
+        {
+          "name": "POST_Valido_CrearComentario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code es 201 Created\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"El comentario creado tiene id = 501\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.id).to.eql(501);",
+                  "});",
+                  "",
+                  "pm.test(\"Los datos enviados coinciden con los devueltos\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.postId).to.eql(9);",
+                  "    pm.expect(jsonData.name).to.eql(\"comentario de prueba\");",
+                  "    pm.expect(jsonData.email).to.eql(\"email@prueba.com\");",
+                  "    pm.expect(jsonData.body).to.eql(\"comentario de prueba para postman\");",
+                  "});",
+                  "",
+                  "pm.test(\"La respuesta tiene todos los campos esperados\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.all.keys(\"postId\", \"id\", \"name\", \"email\", \"body\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "   {\n     \"postId\": 9,\n     \"name\": \"comentario de prueba\",\n     \"email\": \"email@prueba.com\",\n     \"body\": \"comentario de prueba para postman\"\n   }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST_Valido_CrearComentario2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code es 201 Created\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"El comentario creado tiene id = 501\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.id).to.eql(501);",
+                  "});",
+                  "",
+                  "pm.test(\"Los datos enviados coinciden con los devueltos\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.postId).to.eql(1);",
+                  "    pm.expect(jsonData.name).to.eql(\"segundo comentario de prueba\");",
+                  "    pm.expect(jsonData.email).to.eql(\"email2@prueba.com\");",
+                  "    pm.expect(jsonData.body).to.eql(\"segundo caso valido de creacion para variar el postId\");",
+                  "});",
+                  "",
+                  "pm.test(\"La respuesta tiene todos los campos esperados\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.all.keys(\"postId\", \"id\", \"name\", \"email\", \"body\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\n     \"postId\": 1,\n     \"name\": \"segundo comentario de prueba\",\n     \"email\": \"email2@prueba.com\",\n     \"body\": \"segundo caso valido de creacion para variar el postId\"\n   }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST_Invalido_PostIdInexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code es 201 Created\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"El servicio acepta un postId inexistente sin validarlo\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.postId).to.eql(9999);",
+                  "    pm.expect(jsonData.id).to.eql(501);",
+                  "});",
+                  "",
+                  "pm.test(\"Los demás campos se reflejan igual, sin validación de integridad referencial\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.name).to.eql(\"comentario con postId invalido\");",
+                  "    pm.expect(jsonData.email).to.eql(\"post@test.com\");",
+                  "    pm.expect(jsonData.body).to.eql(\"este postId no existe en /posts\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"postId\": 9999,\n    \"name\": \"comentario con postId invalido\",\n    \"email\": \"post@test.com\",\n    \"body\": \"este postId no existe en /posts\"\n}\n\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "PUT",
+      "item": [
+        {
+          "name": "PUT_Valido_ActualizarComentario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code es 200 OK\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"El id devuelto es 45 (tomado de la URL)\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.id).to.eql(45);",
+                  "});",
+                  "",
+                  "pm.test(\"Los datos actualizados coinciden con los enviados\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.postId).to.eql(9);",
+                  "    pm.expect(jsonData.name).to.eql(\"comentario actualizado\");",
+                  "    pm.expect(jsonData.email).to.eql(\"actualizado@ejemplo.com\");",
+                  "    pm.expect(jsonData.body).to.eql(\"comentario luego de la actualizacion\");",
+                  "});",
+                  "",
+                  "pm.test(\"La respuesta tiene todos los campos esperados\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.all.keys(\"postId\", \"id\", \"name\", \"email\", \"body\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"postId\": 9,\n    \"name\": \"comentario actualizado\",\n    \"email\": \"actualizado@ejemplo.com\",\n    \"body\": \"comentario luego de la actualizacion\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments/45",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                "45"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT_Valido_ActualizarComentario2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code es 200 OK\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"El id devuelto es 1 (tomado de la URL)\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.id).to.eql(1);",
+                  "});",
+                  "",
+                  "pm.test(\"Los datos actualizados coinciden con los enviados\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.postId).to.eql(1);",
+                  "    pm.expect(jsonData.name).to.eql(\"segundo comentario actualizado\");",
+                  "    pm.expect(jsonData.email).to.eql(\"actualizado2@ejemplo.com\");",
+                  "    pm.expect(jsonData.body).to.eql(\"segunda prueba de actualizacion con otro id\");",
+                  "});",
+                  "",
+                  "pm.test(\"La respuesta tiene todos los campos esperados\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.all.keys(\"postId\", \"id\", \"name\", \"email\", \"body\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"postId\": 1,\n    \"name\": \"segundo comentario actualizado\",\n    \"email\": \"actualizado2@ejemplo.com\",\n    \"body\": \"segunda prueba de actualizacion con otro id\"\n}\n\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT_Invalido_IdInexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code NO es 200 (falla de forma no controlada)\", function () {",
+                  "    pm.expect(pm.response.code).to.not.eql(200);",
+                  "});",
+                  "",
+                  "pm.test(\"El servidor responde con error 500 (Internal Server Error)\", function () {",
+                  "    pm.response.to.have.status(500);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"postId\": 9,\n    \"name\": \"intento de actualizar algo que no existe\",\n    \"email\": \"test@ejemplo.com\",\n    \"body\": \"este id no existe\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments/9999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                "9999"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "DELETE",
+      "item": [
+        {
+          "name": "DELETE_Valido_PorId",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code es 200 OK\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"La respuesta es un objeto vacío\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.be.an(\"object\");",
+                  "    pm.expect(Object.keys(jsonData)).to.have.lengthOf(0);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"postId\": 1,\n    \"name\": \"segundo comentario actualizado\",\n    \"email\": \"actualizado2@ejemplo.com\",\n    \"body\": \"segunda prueba de actualizacion con otro id\"\n}\n\n"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments/45",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                "45"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE_Valido_PorId2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code es 200 OK\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"La respuesta es un objeto vacío\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.be.an(\"object\");",
+                  "    pm.expect(Object.keys(jsonData)).to.have.lengthOf(0);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"postId\": 1,\n    \"name\": \"segundo comentario actualizado\",\n    \"email\": \"actualizado2@ejemplo.com\",\n    \"body\": \"segunda prueba de actualizacion con otro id\"\n}\n\n"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE_Invalido_IdInexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code es 200 OK (a pesar de que el id no existe)\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"La respuesta es un objeto vacío\", function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.be.an(\"object\");",
+                  "    pm.expect(Object.keys(jsonData)).to.have.lengthOf(0);",
+                  "});",
+                  "",
+                  "pm.test(\"El servicio no distingue entre id existente e inexistente al borrar\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\n"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments/9999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                "9999"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
+    }
+  ]
+}

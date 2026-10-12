@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="066acedf-a873-416f-b03b-6e794254f3fe" activeEnvironment="Default" name="BCU_Cotizaciones" resourceRoot="" soapui-version="5.10.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="d041e4b9-59ee-43b8-916d-2f2daa726e1b" wsaVersion="NONE" name="wsbcucotizacionesSoapBinding" type="wsdl" bindingName="{Cotiza}wsbcucotizacionesSoapBinding" soapVersion="1_1" anonymous="optional" definition="https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones?wsdl"><con:part><con:url>https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones?wsdl</con:url><con:content><![CDATA[<definitions name="wsbcucotizaciones" targetNamespace="Cotiza" xmlns:wsdlns="Cotiza" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="Cotiza">
+  <types>
+    <schema targetNamespace="Cotiza" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/">
+      <complexType name="wsbcucotizacionesin">
+        <sequence>
+          <element name="Moneda" type="tns:ArrayOfint"></element>
+          <element name="FechaDesde" type="xsd:date" nillable="true"></element>
+          <element name="FechaHasta" type="xsd:date" nillable="true"></element>
+          <element name="Grupo" type="xsd:byte"></element>
+        </sequence>
+      </complexType>
+      <complexType name="ArrayOfint">
+        <sequence>
+          <element minOccurs="0" maxOccurs="unbounded" name="item" type="xsd:short"></element>
+        </sequence>
+      </complexType>
+      <complexType name="wsbcucotizacionesout">
+        <sequence>
+          <element name="respuestastatus" type="tns:respuestastatus"></element>
+          <element name="datoscotizaciones" type="tns:datoscotizaciones"></element>
+        </sequence>
+      </complexType>
+      <complexType name="respuestastatus">
+        <sequence>
+          <element name="status" type="xsd:byte"></element>
+          <element name="codigoerror" type="xsd:short"></element>
+          <element name="mensaje" type="xsd:string"></element>
+        </sequence>
+      </complexType>
+      <complexType name="datoscotizaciones">
+        <sequence>
+          <element minOccurs="0" maxOccurs="unbounded" name="datoscotizaciones.dato" type="tns:datoscotizaciones.dato"></element>
+        </sequence>
+      </complexType>
+      <complexType name="datoscotizaciones.dato">
+        <sequence>
+          <element name="Fecha" type="xsd:date" nillable="true"></element>
+          <element name="Moneda" type="xsd:short"></element>
+          <element name="Nombre" type="xsd:string"></element>
+          <element name="CodigoISO" type="xsd:string"></element>
+          <element name="Emisor" type="xsd:string"></element>
+          <element name="TCC" type="xsd:double"></element>
+          <element name="TCV" type="xsd:double"></element>
+          <element name="ArbAct" type="xsd:double"></element>
+          <element name="FormaArbitrar" type="xsd:byte"></element>
+        </sequence>
+      </complexType>
+      <element name="wsbcucotizaciones.Execute">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="Entrada" type="tns:wsbcucotizacionesin"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="wsbcucotizaciones.ExecuteResponse">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="Salida" type="tns:wsbcucotizacionesout"/>
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="wsbcucotizaciones.ExecuteSoapIn">
+    <part name="parameters" element="tns:wsbcucotizaciones.Execute"/>
+  </message>
+  <message name="wsbcucotizaciones.ExecuteSoapOut">
+    <part name="parameters" element="tns:wsbcucotizaciones.ExecuteResponse"/>
+  </message>
+  <portType name="wsbcucotizacionesSoapPort">
+    <operation name="Execute">
+      <input message="wsdlns:wsbcucotizaciones.ExecuteSoapIn"/>
+      <output message="wsdlns:wsbcucotizaciones.ExecuteSoapOut"/>
+    </operation>
+  </portType>
+  <binding name="wsbcucotizacionesSoapBinding" type="wsdlns:wsbcucotizacionesSoapPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="Execute">
+      <soap:operation soapAction="Cotizaaction/AWSBCUCOTIZACIONES.Execute"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="wsbcucotizaciones">
+    <port name="wsbcucotizacionesSoapPort" binding="wsdlns:wsbcucotizacionesSoapBinding">
+      <soap:address location="https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones</con:endpoint></con:endpoints><con:operation id="c20e0529-9052-418f-823b-6e2672a98166" isOneWay="false" action="Cotizaaction/AWSBCUCOTIZACIONES.Execute" name="Execute" bindingOperationName="Execute" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5d9b980b-a32c-484c-a23f-f116c370196a" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#Endpoint}</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cot="Cotiza">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cot:wsbcucotizaciones.Execute>
+         <cot:Entrada>
+            <cot:Moneda>
+               <cot:item>2222</cot:item>
+            </cot:Moneda>
+            <cot:FechaDesde>2026-05-06</cot:FechaDesde>
+            <cot:FechaHasta>2026-05-06</cot:FechaHasta>
+            <cot:Grupo></cot:Grupo>
+         </cot:Entrada>
+      </cot:wsbcucotizaciones.Execute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="Cotizaaction/AWSBCUCOTIZACIONES.Execute"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="4018dc11-29cb-4836-b59a-9c2c6f81d599" name="TS_Cotizaciones"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="5a27e4ca-f818-47bf-be5e-72fa260f1cf6" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC01_Valido_USD_FechaUnica" searchProperties="true"><con:settings/><con:testStep type="request" name="SOAP Request" id="e6f21fc8-7970-4671-8ee7-62936b47436c"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsbcucotizacionesSoapBinding</con:interface><con:operation>Execute</con:operation><con:request name="SOAP Request" id="fdb7f814-ab34-4517-bc04-eb29a23f08d6"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#Endpoint}</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cot="Cotiza">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cot:wsbcucotizaciones.Execute>
+         <cot:Entrada>
+            <cot:Moneda>
+               <cot:item>${#Project#MonedaDolar}</cot:item>
+            </cot:Moneda>
+            <cot:FechaDesde>2026-05-06</cot:FechaDesde>
+            <cot:FechaHasta>2026-05-06</cot:FechaHasta>
+            <cot:Grupo></cot:Grupo>
+         </cot:Entrada>
+      </cot:wsbcucotizaciones.Execute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="50f7aabc-f7da-4bd1-b700-6b66ba2577fc"/><con:assertion type="SOAP Fault Assertion" id="e5c01094-fe47-4cff-a330-f121770ae1c0" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="6df525f0-bd9b-4942-a8cb-04102447fad5" name="Contains"><con:configuration><token>&lt;status>1&lt;/status></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="XPath Match" id="a0e28eeb-9cc0-477d-b0e6-a4a2a3648be8" name="XPath Match"><con:configuration><path>//*:TCC</path><content>39.868000</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Simple Contains" id="7f211ccb-e443-4f57-b484-277e94b92ac1"><con:configuration/></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="d05891c3-5b99-454c-bec0-b8b9479cf827" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC02_Valido_EUR_FechaUnica" searchProperties="true"><con:settings/><con:testStep type="request" name="SOAP Request" id="caa9759e-1d5c-4c67-a396-20170dfffda7"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsbcucotizacionesSoapBinding</con:interface><con:operation>Execute</con:operation><con:request name="SOAP Request" id="1030d5d8-7c67-4501-b4c5-9256b36f1324"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cot="Cotiza">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cot:wsbcucotizaciones.Execute>
+         <cot:Entrada>
+            <cot:Moneda>
+               <cot:item>${#Project#MonedaEuro}</cot:item>
+            </cot:Moneda>
+            <cot:FechaDesde>2026-04-06</cot:FechaDesde>
+            <cot:FechaHasta>2026-04-06</cot:FechaHasta>
+            <cot:Grupo></cot:Grupo>
+         </cot:Entrada>
+      </cot:wsbcucotizaciones.Execute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="ea011fcd-b126-4764-b8ab-a7935dbb8922"/><con:assertion type="Simple Contains" id="ebf05ab6-8767-4698-8d8d-ee058ee2447e" name="Contains"><con:configuration><token>&lt;status>1&lt;/status></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="SOAP Fault Assertion" id="de68a613-f953-4f53-a300-a10381c7d7c9" name="Not SOAP Fault"/><con:assertion type="XPath Match" id="737976ad-4681-4ef9-869c-afe2ee47f57f" name="XPath Match"><con:configuration><path>//*:TCC</path><content>46.882493</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="5b596fcb-3248-42f8-9412-fd729aded5af" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC03_Valido_Multimoneda" searchProperties="true"><con:settings/><con:testStep type="request" name="SOAP Request" id="ab5edbaf-6e65-4a8b-8a79-1b7ab71f591c"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsbcucotizacionesSoapBinding</con:interface><con:operation>Execute</con:operation><con:request name="SOAP Request" id="1030d5d8-7c67-4501-b4c5-9256b36f1324"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#Endpoint}</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cot="Cotiza">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cot:wsbcucotizaciones.Execute>
+         <cot:Entrada>
+            <cot:Moneda>
+               <cot:item>${#Project#MonedaDolar}</cot:item>
+               <cot:item>${#Project#MonedaEuro}</cot:item>
+            </cot:Moneda>
+            <cot:FechaDesde>2026-05-06</cot:FechaDesde>
+            <cot:FechaHasta>2026-05-06</cot:FechaHasta>
+            <cot:Grupo></cot:Grupo>
+         </cot:Entrada>
+      </cot:wsbcucotizaciones.Execute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="ea011fcd-b126-4764-b8ab-a7935dbb8922"/><con:assertion type="Simple Contains" id="ebf05ab6-8767-4698-8d8d-ee058ee2447e" name="Contains"><con:configuration><token>&lt;status>1&lt;/status></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="SOAP Fault Assertion" id="de68a613-f953-4f53-a300-a10381c7d7c9" name="Not SOAP Fault"/><con:assertion type="XPath Match" id="737976ad-4681-4ef9-869c-afe2ee47f57f" name="XPath Match"><con:configuration><path>count(//*:datoscotizaciones.dato)</path><content>2</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Simple Contains" id="dffa87f9-4e15-4ef6-85d8-972b8c923b2b" name="Contains 1"><con:configuration><token>&lt;CodigoISO>USD&lt;/CodigoISO></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="7e322c5d-b80c-488b-b36c-54a2102742f2" name="Contains 2"><con:configuration><token>&lt;CodigoISO>EURO&lt;/CodigoISO></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="c28a141e-6851-4f4c-893b-c6867a9d6c6d" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC04_Valido_TodasMonedas" searchProperties="true"><con:settings/><con:testStep type="request" name="SOAP Request" id="80389b23-e183-4c49-aa1e-42b16ed5a3df"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsbcucotizacionesSoapBinding</con:interface><con:operation>Execute</con:operation><con:request name="SOAP Request" id="1030d5d8-7c67-4501-b4c5-9256b36f1324"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#Endpoint}</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cot="Cotiza">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cot:wsbcucotizaciones.Execute>
+         <cot:Entrada>
+            <cot:Moneda>
+               <cot:item>0</cot:item>
+            </cot:Moneda>
+            <cot:FechaDesde>2026-05-06</cot:FechaDesde>
+            <cot:FechaHasta>2026-05-06</cot:FechaHasta>
+            <cot:Grupo></cot:Grupo>
+         </cot:Entrada>
+      </cot:wsbcucotizaciones.Execute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="ea011fcd-b126-4764-b8ab-a7935dbb8922"/><con:assertion type="Simple Contains" id="ebf05ab6-8767-4698-8d8d-ee058ee2447e" name="Contains"><con:configuration><token>&lt;status>1&lt;/status></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="SOAP Fault Assertion" id="de68a613-f953-4f53-a300-a10381c7d7c9" name="Not SOAP Fault"/><con:assertion type="XPath Match" id="737976ad-4681-4ef9-869c-afe2ee47f57f" name="XPath Match"><con:configuration><path>count(//*:datoscotizaciones.dato)</path><content>40</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="d79f1c94-6bd5-4ee6-96f2-a305666c6d85" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC05_Valido_RangoFechas" searchProperties="true"><con:settings/><con:testStep type="request" name="SOAP Request" id="991ae811-be1e-481f-bcf2-fe706b9aec29"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsbcucotizacionesSoapBinding</con:interface><con:operation>Execute</con:operation><con:request name="SOAP Request" id="1030d5d8-7c67-4501-b4c5-9256b36f1324"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#Endpoint}</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cot="Cotiza">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cot:wsbcucotizaciones.Execute>
+         <cot:Entrada>
+            <cot:Moneda>
+               <cot:item>${#Project#MonedaDolar}</cot:item>
+            </cot:Moneda>
+            <cot:FechaDesde>2026-05-04</cot:FechaDesde>
+            <cot:FechaHasta>2026-05-08</cot:FechaHasta>
+            <cot:Grupo></cot:Grupo>
+         </cot:Entrada>
+      </cot:wsbcucotizaciones.Execute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="ea011fcd-b126-4764-b8ab-a7935dbb8922"/><con:assertion type="Simple Contains" id="ebf05ab6-8767-4698-8d8d-ee058ee2447e" name="Contains"><con:configuration><token>&lt;status>1&lt;/status></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="SOAP Fault Assertion" id="de68a613-f953-4f53-a300-a10381c7d7c9" name="Not SOAP Fault"/><con:assertion type="XPath Match" id="737976ad-4681-4ef9-869c-afe2ee47f57f" name="XPath Match"><con:configuration><path>count(//*:datoscotizaciones.dato)</path><content>5</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="74ce13e5-fe94-4c38-ac9f-62c0b2c71814" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC06_Invalido_MonedaInexistente" searchProperties="true"><con:settings/><con:testStep type="request" name="SOAP Request" id="411becd6-8f55-4ee8-9655-17874408ab70"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsbcucotizacionesSoapBinding</con:interface><con:operation>Execute</con:operation><con:request name="SOAP Request" id="fdb7f814-ab34-4517-bc04-eb29a23f08d6"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#Endpoint}</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cot="Cotiza">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cot:wsbcucotizaciones.Execute>
+         <cot:Entrada>
+            <cot:Moneda>
+               <cot:item>9999</cot:item>
+            </cot:Moneda>
+            <cot:FechaDesde>2026-05-06</cot:FechaDesde>
+            <cot:FechaHasta>2026-05-06</cot:FechaHasta>
+            <cot:Grupo></cot:Grupo>
+         </cot:Entrada>
+      </cot:wsbcucotizaciones.Execute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="50f7aabc-f7da-4bd1-b700-6b66ba2577fc"/><con:assertion type="SOAP Fault Assertion" id="e5c01094-fe47-4cff-a330-f121770ae1c0" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="45df1fdf-2ab1-4cc9-8720-b06ca8a7b8b5" name="Contains"><con:configuration><token>&lt;status>0&lt;/status></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="c276a8d9-bbc0-4baf-9988-770d33f2e7b2" name="Contains 2"><con:configuration><token>&lt;codigoerror>101&lt;/codigoerror></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="ce313ec3-16a0-4668-a756-5fd3768057ea" name="Contains 3"><con:configuration><token>Código de moneda no existe</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="077c55f8-a51f-4e4a-b111-f0a92081cd90" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC07_Invalido_RangoFechaInvertido" searchProperties="true"><con:settings/><con:testStep type="request" name="SOAP Request" id="01b80861-a6e2-4a67-8915-9dfe7c3f99a7"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsbcucotizacionesSoapBinding</con:interface><con:operation>Execute</con:operation><con:request name="SOAP Request" id="fdb7f814-ab34-4517-bc04-eb29a23f08d6"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#Endpoint}</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cot="Cotiza">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cot:wsbcucotizaciones.Execute>
+         <cot:Entrada>
+            <cot:Moneda>
+               <cot:item>${#Project#MonedaDolar}</cot:item>
+            </cot:Moneda>
+            <cot:FechaDesde>2026-05-08</cot:FechaDesde>
+            <cot:FechaHasta>2026-05-04</cot:FechaHasta>
+            <cot:Grupo></cot:Grupo>
+         </cot:Entrada>
+      </cot:wsbcucotizaciones.Execute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="50f7aabc-f7da-4bd1-b700-6b66ba2577fc"/><con:assertion type="SOAP Fault Assertion" id="e5c01094-fe47-4cff-a330-f121770ae1c0" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="17f2929a-79d3-42e6-ac25-988df987178d" name="Contains"><con:configuration><token>&lt;status>0&lt;/status></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="49e02853-8a10-45df-92b1-968263bd673f" name="Contains 2"><con:configuration><token>&lt;codigoerror>103&lt;/codigoerror></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="4509418f-7d62-4ccf-a438-494902ffba04" name="Contains 3"><con:configuration><token>Fecha Hasta es menor que Fecha Desde</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="745056a9-524f-4eb4-8256-06e3f3b2fd8f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC08_Invalido_FormatoFecha" searchProperties="true"><con:settings/><con:testStep type="request" name="SOAP Request" id="b6f8c969-0f18-4813-8ec7-0f8a01d85184"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsbcucotizacionesSoapBinding</con:interface><con:operation>Execute</con:operation><con:request name="SOAP Request" id="fdb7f814-ab34-4517-bc04-eb29a23f08d6"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#Endpoint}</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cot="Cotiza">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cot:wsbcucotizaciones.Execute>
+         <cot:Entrada>
+            <cot:Moneda>
+               <cot:item>${#Project#MonedaDolar}</cot:item>
+            </cot:Moneda>
+            <cot:FechaDesde>06/05/2026</cot:FechaDesde>
+            <cot:FechaHasta>06/05/2026</cot:FechaHasta>
+            <cot:Grupo></cot:Grupo>
+         </cot:Entrada>
+      </cot:wsbcucotizaciones.Execute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="50f7aabc-f7da-4bd1-b700-6b66ba2577fc"/><con:assertion type="SOAP Fault Assertion" id="e5c01094-fe47-4cff-a330-f121770ae1c0" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="17f2929a-79d3-42e6-ac25-988df987178d" name="Contains"><con:configuration><token>&lt;status>0&lt;/status></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="49e02853-8a10-45df-92b1-968263bd673f" name="Contains 2"><con:configuration><token>&lt;codigoerror>102&lt;/codigoerror></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="4509418f-7d62-4ccf-a438-494902ffba04" name="Contains 3"><con:configuration><token>Campo de fecha inválida</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="a5529253-92e2-4364-b31d-93c6277d0a8b" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC09_Borde_RangoExcedido" searchProperties="true"><con:settings/><con:testStep type="request" name="SOAP Request" id="f080c133-40d0-4cd9-a076-efa21b35f8d8"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsbcucotizacionesSoapBinding</con:interface><con:operation>Execute</con:operation><con:request name="SOAP Request" id="fdb7f814-ab34-4517-bc04-eb29a23f08d6"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#Endpoint}</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cot="Cotiza">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cot:wsbcucotizaciones.Execute>
+         <cot:Entrada>
+            <cot:Moneda>
+               <cot:item>0</cot:item>
+            </cot:Moneda>
+            <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+            <cot:FechaHasta>2026-05-06</cot:FechaHasta>
+            <cot:Grupo></cot:Grupo>
+         </cot:Entrada>
+      </cot:wsbcucotizaciones.Execute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="50f7aabc-f7da-4bd1-b700-6b66ba2577fc"/><con:assertion type="SOAP Fault Assertion" id="e5c01094-fe47-4cff-a330-f121770ae1c0" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="17f2929a-79d3-42e6-ac25-988df987178d" name="Contains"><con:configuration><token>&lt;status>0&lt;/status></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="5ad1df55-0ab6-4705-9a2c-e8b8746873b5" name="Contains 2"><con:configuration><token>&lt;codigoerror>104&lt;/codigoerror></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="75ff626f-7ab1-492c-9b9b-25a994832194" name="Contains 3"><con:configuration><token>Rango de fechas excede lo permitido</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="dcfc93ca-20b5-4f0b-b5cf-416575bd9e56" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC10_Invalido_CampoOmitido" searchProperties="true"><con:settings/><con:testStep type="request" name="SOAP Request" id="020d9e51-db26-414f-86e7-9de70ce7d686"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsbcucotizacionesSoapBinding</con:interface><con:operation>Execute</con:operation><con:request name="SOAP Request" id="fdb7f814-ab34-4517-bc04-eb29a23f08d6"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#Endpoint}</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cot="Cotiza">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cot:wsbcucotizaciones.Execute>
+         <cot:Entrada>
+            <cot:Moneda>
+               <cot:item>${#Project#MonedaDolar}</cot:item>
+            </cot:Moneda>
+            <cot:FechaHasta>2026-05-06</cot:FechaHasta>
+            <cot:Grupo></cot:Grupo>
+         </cot:Entrada>
+      </cot:wsbcucotizaciones.Execute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="50f7aabc-f7da-4bd1-b700-6b66ba2577fc"/><con:assertion type="SOAP Fault Assertion" id="e5c01094-fe47-4cff-a330-f121770ae1c0" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="17f2929a-79d3-42e6-ac25-988df987178d" name="Contains"><con:configuration><token>&lt;status>0&lt;/status></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="49e02853-8a10-45df-92b1-968263bd673f" name="Contains 2"><con:configuration><token>&lt;codigoerror>102&lt;/codigoerror></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="4509418f-7d62-4ccf-a438-494902ffba04" name="Contains 3"><con:configuration><token>Campo de fecha inválida</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="b3313dc2-67a7-4bb3-9f30-3213fad5fe14" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC11_Invalido_MonedaNoNumerica" searchProperties="true"><con:settings/><con:testStep type="request" name="SOAP Request" id="11eb118f-1c6a-4d50-b534-963eb8f42f40"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsbcucotizacionesSoapBinding</con:interface><con:operation>Execute</con:operation><con:request name="SOAP Request" id="fdb7f814-ab34-4517-bc04-eb29a23f08d6"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#Endpoint}</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cot="Cotiza">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cot:wsbcucotizaciones.Execute>
+         <cot:Entrada>
+            <cot:Moneda>
+               <cot:item>USD</cot:item>
+            </cot:Moneda>
+            <cot:FechaDesde>2026-05-06</cot:FechaDesde>
+            <cot:FechaHasta>2026-05-06</cot:FechaHasta>
+            <cot:Grupo></cot:Grupo>
+         </cot:Entrada>
+      </cot:wsbcucotizaciones.Execute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="17f2929a-79d3-42e6-ac25-988df987178d" name="Contains"><con:configuration><token>Server Error</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="33a7c6d3-9772-4ea8-aa12-dfbbdc06c9d4" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties><con:property><con:name>Endpoint</con:name><con:value>https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones</con:value></con:property><con:property><con:name>MonedaDolar</con:name><con:value>2222</con:value></con:property><con:property><con:name>MonedaEuro</con:name><con:value>1111</con:value></con:property><con:property><con:name>MonedaReal</con:name><con:value>1000</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
